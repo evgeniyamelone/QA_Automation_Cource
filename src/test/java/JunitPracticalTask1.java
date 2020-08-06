@@ -1,3 +1,4 @@
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -43,12 +44,23 @@ public class JunitPracticalTask1 {
 
     @ParameterizedTest
     @ValueSource(strings = {"one", "two", "three"})
-    public void paramTest(String value){
-        Assertions.
+    public void paramTest(String value) {
         Assertions.assertNotEquals("", value);
     }
 
+    @Test
+    public void assertFalse_failTest() {
+        Assertions.assertFalse(2 > 1);
+    }
 
+    @Test
+    public void softAssertTest() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(1 > 2).isTrue();
+        softAssertions.assertThat(1).isEqualTo(5);
+        softAssertions.assertThat(9).isGreaterThan(7);
+        softAssertions.assertAll();
+    }
 }
 
 
