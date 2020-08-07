@@ -1,39 +1,44 @@
-import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.logging.Logger;
 
 public class JunitPracticalTask2 {
+    private static Logger LOGGER = Logger.getLogger(JunitPracticalTask2.class.getName());
+
     @BeforeAll
     public static void beforeAll() {
-        String s = "This is before all tests";
-        System.out.println(s);
+        LOGGER.info("@BeforeAll is started");
     }
 
     @BeforeEach
-    public static void beforeEach() {
-        String s = "... and this is before each tests";
-        System.out.println(s);
+    public void beforeEach() {
+        LOGGER.info("@BeforeEach is started");
     }
 
     @AfterAll
     public static void afterAll() {
-        String s = "This is after all tests";
-        System.out.println(s);
+        LOGGER.info("@AfterAll is started");
     }
 
     @AfterEach
-    public static void afterEach() {
-        String s = "This is after each tests";
-        System.out.println(s);
+    public void afterEach() {
+        LOGGER.info("@AfterEach is started");
     }
 
     @Test
-    public static test1() {
-        Assertions.assertTrue(1 == 1);
+    public void test1() {
+        LOGGER.info("Test1 is started");
+        Assertions.assertTrue(2 < 1);
+    }
+
+    @Test
+    public void test2() {
+        LOGGER.info("Test2 is started");
+        Assertions.assertEquals(1, 1);
     }
 }
 
