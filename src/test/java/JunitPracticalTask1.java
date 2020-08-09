@@ -1,12 +1,13 @@
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.List;
 
-
+@ExtendWith(LoggerExtension.class)
 public class JunitPracticalTask1 {
 
     @Test
@@ -49,15 +50,10 @@ public class JunitPracticalTask1 {
     }
 
     @Test
-    public void assertFalse_failTest() {
-        Assertions.assertFalse(2 > 1);
-    }
-
-    @Test
     public void softAssertTest() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(1 > 2).isTrue();
-        softAssertions.assertThat(1).isEqualTo(5);
+        softAssertions.assertThat(2 > 1).isTrue();
+        softAssertions.assertThat(5).isEqualTo(5);
         softAssertions.assertThat(9).isGreaterThan(7);
         softAssertions.assertAll();
     }
