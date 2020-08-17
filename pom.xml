@@ -19,6 +19,7 @@
         <assertj-core.version>3.16.1</assertj-core.version>
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>3.141.59</selenium.version>
     </properties>
 
     <dependencies>
@@ -27,6 +28,11 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
