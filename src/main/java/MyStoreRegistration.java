@@ -18,6 +18,7 @@ public class MyStoreRegistration {
         driver.findElement(By.xpath("//*[@id=\"email_create\"]")).sendKeys(email);
         driver.findElement(By.xpath("//*[@id=\"SubmitCreate\"]")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"customer_firstname\"]")));
+
         driver.findElement(By.xpath("//*[@id=\"customer_firstname\"]")).sendKeys("Johnny");
         driver.findElement(By.xpath("//*[@id=\"customer_lastname\"]")).sendKeys("Flynn");
         driver.findElement(By.xpath("//*[@id=\"passwd\"]")).sendKeys(password);
@@ -33,7 +34,8 @@ public class MyStoreRegistration {
         state.selectByValue("10");
         driver.findElement(By.xpath("//*[@id=\"postcode\"]")).sendKeys(RandomStringUtils.randomNumeric(5));
         driver.findElement(By.xpath("//*[@id=\"phone_mobile\"]")).clear();
-        driver.findElement(By.xpath("//*[@id=\"phone_mobile\"]")).sendKeys("+" + RandomStringUtils.randomNumeric(10));
+        driver.findElement(By.xpath("//*[@id=\"phone_mobile\"]"))
+                .sendKeys("+" + RandomStringUtils.randomNumeric(10));
         driver.findElement(By.xpath("//*[@id=\"alias\"]")).clear();
         driver.findElement(By.xpath("//*[@id=\"alias\"]")).sendKeys("Home");
         driver.findElement(By.xpath("//*[@id=\"submitAccount\"]")).click();
