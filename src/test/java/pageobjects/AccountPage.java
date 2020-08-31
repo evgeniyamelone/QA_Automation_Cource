@@ -1,23 +1,21 @@
 package pageobjects;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage {
+public class AccountPage {
     private WebDriver driver;
     private WebDriverWait wait;
-    private By signInButtonLocator = By.className("login");
+    private WebElement signOutButton = driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div/nav/div[2]/a"));
 
-    public MainPage(WebDriver driver) {
+    public AccountPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 5);
     }
 
-    public void clickSignInButton() {
-        WebElement signInButton = driver.findElement(signInButtonLocator);
-        signInButton.click();
+    public void signOut() {
+        signOutButton.click();
     }
 }

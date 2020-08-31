@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class AccountCreationPage {
     private WebDriver driver;
     private WebDriverWait wait;
-    private WebElement firstNameField = driver.findElement(By.xpath("//*[@id=\"customer_firstname\"]"));
-    private WebElement lastNameField = driver.findElement(By.xpath("//*[@id=\"customer_lastname\"]"));
+    private By firstNameFieldLocator = By.xpath("//*[@id=\"customer_firstname\"]");
+    private By lastNameFieldLocator = By.xpath("//*[@id=\"customer_lastname\"]");
     private WebElement passwordField = driver.findElement(By.xpath("//*[@id=\"passwd\"]"));
     private Select dayDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"days\"]")));
     private Select monthDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"months\"]")));
@@ -31,6 +31,8 @@ public class AccountCreationPage {
     public void createAccount(String firstName, String lastName, String password,
                               String day, String month, String year, String country, String city,
                               String state, String postCode, String mobile, String alias) {
+        WebElement firstNameField = driver.findElement(firstNameFieldLocator);
+        WebElement lastNameField = driver.findElement(lastNameFieldLocator);
         firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         passwordField.sendKeys(password);
@@ -44,8 +46,5 @@ public class AccountCreationPage {
         mobilePhoneField.sendKeys("+" + mobile);
         aliasField.sendKeys(alias);
         submitAccountButton.click();
-    }
-    public void signOut(){
-
     }
 }

@@ -10,7 +10,8 @@ public class MyStoreRegistration {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.get("http://automationpractice.com/index.php");
-        driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")).click();
+      //  driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")).click();
+        driver.findElement(By.className("login")).click();
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"email_create\"]")));
         String email = "flynn+" + RandomStringUtils.randomAlphanumeric(10) + "@gmail.com";
