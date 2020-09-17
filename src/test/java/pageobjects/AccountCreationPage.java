@@ -1,50 +1,87 @@
 package pageobjects;
 
-import org.openqa.selenium.By;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ui.UserAccount;
+import ui.UserAccountRegistrationForm;
 
+@Getter
+@Setter
 public class AccountCreationPage {
     private WebDriver driver;
     private WebDriverWait wait;
-    private By firstNameFieldLocator = By.xpath("//*[@id=\"customer_firstname\"]");
-    private By lastNameFieldLocator = By.xpath("//*[@id=\"customer_lastname\"]");
-    private WebElement passwordField = driver.findElement(By.xpath("//*[@id=\"passwd\"]"));
-    private Select dayDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"days\"]")));
-    private Select monthDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"months\"]")));
-    private Select yearDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"years\"]")));
-    private WebElement addressField = driver.findElement(By.xpath("//*[@id=\"address1\"]"));
-    private WebElement cityField = driver.findElement(By.xpath("//*[@id=\"city\"]"));
-    private Select stateDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"id_state\"]")));
-    private WebElement postCodeField = driver.findElement(By.xpath("//*[@id=\"postcode\"]"));
-    private WebElement mobilePhoneField = driver.findElement(By.xpath("//*[@id=\"phone_mobile\"]"));
-    private WebElement aliasField = driver.findElement(By.xpath("//*[@id=\"alias\"]"));
-    private WebElement submitAccountButton = driver.findElement(By.xpath("//*[@id=\"submitAccount\"]"));
+
+    @FindBy(id = "customer_firstname")
+    private WebElement customerFirstNameField;
+
+    @FindBy(id = "customer_lastname")
+    private WebElement customerLastNameField;
+
+    @FindBy(id = "passwd")
+    private WebElement passwordField;
+
+    @FindBy(id = "days")
+    private WebElement dayDropdown;
+
+    @FindBy(id = "months")
+    private WebElement monthDropdown;
+
+    @FindBy(id = "years")
+    private WebElement yearDropdown;
+
+    @FindBy(id = "address1")
+    private WebElement addressField;
+
+    @FindBy(id = "city")
+    private WebElement cityField;
+
+    @FindBy(id = "id_state")
+    private WebElement stateDropdown;
+
+    @FindBy(id = "postcode")
+    private WebElement postCodeField;
+
+    @FindBy(id = "phone_mobile")
+    private WebElement mobilePhoneField;
+
+    @FindBy(id = "alias")
+    private WebElement aliasField;
+
+    @FindBy(id = "submitAccount")
+    private WebElement submitAccountButton;
 
     public AccountCreationPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 5);
+        this.wait = new WebDriverWait(driver, 30);
     }
 
-    public void createAccount(String firstName, String lastName, String password,
-                              String day, String month, String year, String country, String city,
-                              String state, String postCode, String mobile, String alias) {
-        WebElement firstNameField = driver.findElement(firstNameFieldLocator);
-        WebElement lastNameField = driver.findElement(lastNameFieldLocator);
-        firstNameField.sendKeys(firstName);
-        lastNameField.sendKeys(lastName);
-        passwordField.sendKeys(password);
-        dayDropdown.selectByValue(day);
-        monthDropdown.selectByValue(month);
-        yearDropdown.selectByValue(year);
-        addressField.sendKeys(country);
-        cityField.sendKeys(city);
-        stateDropdown.selectByValue(state);
-        postCodeField.sendKeys(postCode);
-        mobilePhoneField.sendKeys("+" + mobile);
-        aliasField.sendKeys(alias);
+    public UserAccount createAccount(@NonNull UserAccountRegistrationForm userForm) {
+        customerFirstNameField.sendKeys(userForm.getFirstName());
+        customerLastNameField.sendKeys(userForm.getLastName());
+        passwordField.sendKeys(userForm.getPassword());
+        Select dayStatus = new Select(dayDropdown);
+        dayStatus.selectByValue(userForm.getDay());
+        Select monthStatus = new Select(monthDropdown);
+        monthStatus.selectByValue(userForm.getMonth());
+        Select yearStatus = new Select(yearDropdown);
+        yearStatus.selectByValue(userForm.getYear());
+        addressField.sendKeys(userForm.getStreetAddress());
+        cityField.sendKeys(userForm.getCity());
+        Select stateStatus = new Select(stateDropdown);
+        stateStatus.selectByValue(userForm.getState());
+        postCodeField.sendKeys(userForm.getPostCode());
+        mobilePhoneField.sendKeys("+" + userForm.getMobile());
+        aliasField.sendKeys(userForm.getAlias());
         submitAccountButton.click();
+
+        return new UserAccount(userForm.getPassword(), userForm.getEmail());
     }
 }

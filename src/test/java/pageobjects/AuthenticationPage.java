@@ -1,24 +1,28 @@
 package pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AuthenticationPage {
     private WebDriver driver;
     private WebDriverWait wait;
-    private By emailFieldLocator = By.xpath("//*[@id=\"email_create\"]");
-    private By createAccountButtonLocator = By.xpath("//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a");
+
+    @FindBy(id = "email_create")
+    private WebElement emailField;
+
+    @FindBy(id = "SubmitCreate")
+    private WebElement createAccountButton;
 
     public AuthenticationPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 5);
     }
 
     public void startAccountAuth(String email) {
-        WebElement emailField = driver.findElement(emailFieldLocator);
-        WebElement createAccountButton = driver.findElement(createAccountButtonLocator);
         emailField.sendKeys(email);
         createAccountButton.click();
     }

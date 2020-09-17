@@ -30,7 +30,7 @@ public class RegistrationTest {
         authenticationPage = new AuthenticationPage(driver);
         accountCreationPage = new AccountCreationPage(driver);
         accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.get(ConfigProperties.getProperty("mainpage"));
     }
 
@@ -40,13 +40,15 @@ public class RegistrationTest {
         String password = RandomStringUtils.randomAlphanumeric(10);
         String postCode = RandomStringUtils.randomNumeric(5);
         String mobilePhone = "+" + RandomStringUtils.randomNumeric(10);
+        UserAccount user = new UserAccount(email, password);
         mainPage.clickSignInButton();
         authenticationPage.startAccountAuth(email);
-        accountCreationPage.createAccount("Johnny", "Flynn", password, "14",
-                "03", "1983", "South Africa", "Johannesburg",
-                "10", postCode, mobilePhone, "Home");
-        Assert.assertEquals("Johhny FLynn",
-                driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a/span")).getText());
+        accountCreationPage.createAccount(new UserAccountRegistrationForm("Johnny", "Flynn", password, email,"14",
+                "3", "1983", "South Africa", "Johannesburg",
+                "10", postCode, mobilePhone, "Home"));
+
+        Assert.assertEquals("Johnny Flynn",
+                driver.findElement(By.xpath("//*[contains(@title, 'View my customer account')]")).getText());
     }
 
     @AfterEach
