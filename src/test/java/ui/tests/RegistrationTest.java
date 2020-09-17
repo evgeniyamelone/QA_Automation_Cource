@@ -1,4 +1,4 @@
-package ui;
+package ui.tests;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
@@ -12,6 +12,9 @@ import pageobjects.AccountCreationPage;
 import pageobjects.AccountPage;
 import pageobjects.AuthenticationPage;
 import pageobjects.MainPage;
+import ui.ConfigProperties;
+import ui.UserAccount;
+import ui.UserAccountRegistrationForm;
 
 import java.util.concurrent.TimeUnit;
 
