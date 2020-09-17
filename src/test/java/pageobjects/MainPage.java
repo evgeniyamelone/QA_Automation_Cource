@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage extends AbstractPage {
+public class MainPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -16,7 +16,6 @@ public class MainPage extends AbstractPage {
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        //     this.wait = new WebDriverWait(driver, 5);
     }
 
     public void clickSignInButton() {
