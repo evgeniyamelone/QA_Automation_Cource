@@ -1,6 +1,7 @@
 package ui.tests;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import ui.UserAccount;
 import ui.UserAccountRegistrationForm;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class RegistrationTest {
     public static WebDriver driver;
@@ -24,39 +26,56 @@ public class RegistrationTest {
     public static AuthenticationPage authenticationPage;
     public static AccountCreationPage accountCreationPage;
     public static AccountPage accountPage;
+    private static final Logger logger = Logger.getLogger(RegistrationTest.class.getName());
 
     @BeforeClass
     public static void setup() {
+        logger.info("Setup process started");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getProperty("chromedriver"));
+        logger.info("ChromeDriver initiated");
         driver = new ChromeDriver();
+        logger.info("MainPage initiated");
         mainPage = new MainPage(driver);
+        logger.info("AuthenticationPage initiated");
         authenticationPage = new AuthenticationPage(driver);
+        logger.info("AccountCreationPage initiated");
         accountCreationPage = new AccountCreationPage(driver);
+        logger.info("Account initiated");
         accountPage = new AccountPage(driver);
+        logger.info("Setup implicitly wait for each method");
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.get(ConfigProperties.getProperty("mainpage"));
     }
 
     @Test
     public void testSuccessfulRegistration() {
+        logger.info("Email generation");
         String email = "flynn+" + RandomStringUtils.randomAlphanumeric(10) + "@gmail.com";
+        logger.info("Password generation");
         String password = RandomStringUtils.randomAlphanumeric(10);
+        logger.info("Postal code generation");
         String postCode = RandomStringUtils.randomNumeric(5);
+        logger.info("Mobile phone generation");
         String mobilePhone = "+" + RandomStringUtils.randomNumeric(10);
-        UserAccount user = new UserAccount(email, password);
+        logger.info("Opening main page and clicking Sign in button");
         mainPage.clickSignInButton();
+        logger.info("Starting account registration with generated email");
         authenticationPage.startAccountAuth(email);
-        accountCreationPage.createAccount(new UserAccountRegistrationForm("Johnny", "Flynn", password, email,"14",
+        logger.info("Account registration");
+        accountCreationPage.createAccount(new UserAccountRegistrationForm("Johnny", "Flynn", password, email, "14",
                 "3", "1983", "South Africa", "Johannesburg",
                 "10", postCode, mobilePhone, "Home"));
-
+        UserAccount user = new UserAccount(email, password);
+        logger.info("Account registration verification");
         Assert.assertEquals("Johnny Flynn",
                 driver.findElement(By.xpath("//*[contains(@title, 'View my customer account')]")).getText());
     }
 
-    @AfterEach
+    @AfterClass
     public static void tearDown() {
+        logger.info("Signing out");
         accountPage.signOut();
+        logger.info("Closing browser");
         driver.quit();
     }
 }

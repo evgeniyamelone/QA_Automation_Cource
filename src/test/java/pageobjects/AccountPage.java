@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class AccountPage {
     private WebDriver driver;
     private WebDriverWait wait;
-    // REPLACE THIS LOCATOR
-    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[2]/a")
+
+    @FindBy(xpath = "//*[contains(@title, 'Log me out')]")
     private WebElement signOutButton;
 
     public AccountPage(WebDriver driver) {
