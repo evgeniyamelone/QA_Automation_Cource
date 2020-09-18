@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.UserAccount;
 import ui.UserAccountRegistrationForm;
 
@@ -16,7 +15,6 @@ import ui.UserAccountRegistrationForm;
 @Setter
 public class AccountCreationPage {
     private WebDriver driver;
-    private WebDriverWait wait;
 
     @FindBy(id = "customer_firstname")
     private WebElement customerFirstNameField;
@@ -60,7 +58,6 @@ public class AccountCreationPage {
     public AccountCreationPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 30);
     }
 
     public UserAccount createAccount(@NonNull UserAccountRegistrationForm userForm) {
