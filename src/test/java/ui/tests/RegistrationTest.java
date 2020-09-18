@@ -6,9 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,20 +28,17 @@ public class RegistrationTest {
     public static AccountPage accountPage;
     private static final Logger logger = Logger.getLogger(RegistrationTest.class.getName());
 
-    @BeforeAll
+    @BeforeClass
     public static void setup() {
         logger.info("Setup process started");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getProperty("chromedriver"));
         logger.info("ChromeDriver initiated");
         driver = new ChromeDriver();
-        logger.info("MainPage initiated");
-        driver.get(ConfigProperties.getProperty("mainpage"));
-        logger.info("Setup implicitly wait for each method");
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
-    @BeforeEach
+    @Before
     public void init() {
+        logger.info("MainPage initiated");
         mainPage = new MainPage(driver);
         logger.info("AuthenticationPage initiated");
         authenticationPage = new AuthenticationPage(driver);
@@ -52,6 +46,9 @@ public class RegistrationTest {
         accountCreationPage = new AccountCreationPage(driver);
         logger.info("Account initiated");
         accountPage = new AccountPage(driver);
+        logger.info("Setup implicitly wait for each method");
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.get(ConfigProperties.getProperty("mainpage"));
     }
 
     @Test
