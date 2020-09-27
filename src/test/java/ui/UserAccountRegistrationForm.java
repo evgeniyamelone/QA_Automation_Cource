@@ -1,13 +1,19 @@
 package ui;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@JsonPropertyOrder({"firsName", "lastName", "password", "email",
+        "day", "month", "year", "streetAddress", "city",
+        "state", "postCode", "mobilePhone", "alias"})
 public class UserAccountRegistrationForm {
     @NonNull
     private String firstName;
@@ -32,7 +38,7 @@ public class UserAccountRegistrationForm {
     @NonNull
     private String postCode;
     @NonNull
-    private String mobile;
+    private String mobilePhone;
     @NonNull
     private String alias;
 }

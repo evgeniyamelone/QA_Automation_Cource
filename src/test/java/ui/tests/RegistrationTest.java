@@ -14,7 +14,6 @@ import pageobjects.AccountPage;
 import pageobjects.AuthenticationPage;
 import pageobjects.MainPage;
 import ui.ConfigProperties;
-import ui.UserAccount;
 import ui.UserAccountRegistrationForm;
 
 import java.util.concurrent.TimeUnit;
@@ -66,10 +65,9 @@ public class RegistrationTest {
         logger.info("Starting account registration with generated email");
         authenticationPage.startAccountAuth(email);
         logger.info("Account registration");
-        accountCreationPage.createAccount(new UserAccountRegistrationForm("Johnny", "Flynn", password, email, "14",
-                "3", "1983", "South Africa", "Johannesburg",
+        accountCreationPage.createAccount(new UserAccountRegistrationForm("Johnny", "Flynn",
+                password, email, "14", "3", "1983", "South Africa", "Johannesburg",
                 "10", postCode, mobilePhone, "Home"));
-        UserAccount user = new UserAccount(email, password);
         logger.info("Account registration verification");
         Assert.assertEquals("Johnny Flynn",
                 driver.findElement(By.xpath("//*[contains(@title, 'View my customer account')]")).getText());

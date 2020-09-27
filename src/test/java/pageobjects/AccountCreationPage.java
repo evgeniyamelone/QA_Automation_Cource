@@ -75,7 +75,7 @@ public class AccountCreationPage {
         Select stateStatus = new Select(stateDropdown);
         stateStatus.selectByValue(userForm.getState());
         postCodeField.sendKeys(userForm.getPostCode());
-        mobilePhoneField.sendKeys("+" + userForm.getMobile());
+        mobilePhoneField.sendKeys("+" + userForm.getMobilePhone());
         aliasField.sendKeys(userForm.getAlias());
         submitAccountButton.click();
 
