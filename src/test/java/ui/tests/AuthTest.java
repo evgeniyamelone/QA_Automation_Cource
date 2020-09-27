@@ -78,14 +78,20 @@ public class AuthTest {
         userAccountRegistrationFormsPool.serialize("src/test/resources/registrationForms.json", "Johnny", "Flynn", password, email, "14",
                 "3", "1983", "South Africa", "Johannesburg",
                 "10", postCode, mobilePhone, "Home");
-        userAccountsPool.serialize("src/test/resources/accountData.json", email, password);
 
-        userAccountRegistrationFormsPool.deserialize("src/test/resources/registrationForms.json");
+        logger.info("Read User Object to Json");
+        userAccountsPool.serialize("src/test/resources/accountData.json", email, password);
+        logger.info("Read Json to User Object");
         userAccountsPool.deserialize("src/test/resources/accountData.json");
+        logger.info("Read Json to Registration Form Object");
+        userAccountRegistrationFormsPool.deserialize("src/test/resources/registrationForms.json");
+
+        logger.info("Get User from User Account Pool");
         UserAccount user = userAccountsPool
                 .getUser("src/test/resources/accountData.json");
 
-        accountCreationPage.createAccount(userAccountRegistrationFormsPool.getUserRegistrationForm("src/test/resources/registrationForms.json"));
+        accountCreationPage.createAccount(userAccountRegistrationFormsPool
+                .getUserRegistrationForm("src/test/resources/registrationForms.json"));
         logger.info("Signing out");
         accountPage.signOut();
         logger.info("Opening main page and clicking Sign in button");
