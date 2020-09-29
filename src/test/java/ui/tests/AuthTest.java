@@ -41,7 +41,6 @@ public class AuthTest {
     public static void setup() {
         logger.info("Setup process started");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getProperty("chromedriver"));
-        logger.info("ChromeDriver initiated");
         driver = new ChromeDriver();
         logger.info("Read user from Json");
     }
