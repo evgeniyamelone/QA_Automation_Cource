@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import ui.UserAccount;
-import ui.UserAccountRegistrationForm;
 
 @Getter
 @Setter
@@ -60,7 +59,7 @@ public class AccountCreationPage {
         this.driver = driver;
     }
 
-    public UserAccount createAccount(@NonNull UserAccountRegistrationForm userForm) {
+    public UserAccount createAccount(@NonNull UserAccount userForm) {
         customerFirstNameField.sendKeys(userForm.getFirstName());
         customerLastNameField.sendKeys(userForm.getLastName());
         passwordField.sendKeys(userForm.getPassword());
@@ -79,6 +78,9 @@ public class AccountCreationPage {
         aliasField.sendKeys(userForm.getAlias());
         submitAccountButton.click();
 
-        return new UserAccount(userForm.getPassword(), userForm.getEmail());
+        return new UserAccount(userForm.getFirstName(), userForm.getLastName(), userForm.getPassword(),
+                userForm.getEmail(), userForm.getDay(), userForm.getMonth(),userForm.getYear(),
+                userForm.getStreetAddress(), userForm.getCity(), userForm.getState(), userForm.getPostCode(),
+                userForm.getMobilePhone(), userForm.getAlias());
     }
 }

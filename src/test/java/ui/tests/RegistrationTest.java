@@ -14,7 +14,7 @@ import pageobjects.AccountPage;
 import pageobjects.AuthenticationPage;
 import pageobjects.MainPage;
 import ui.ConfigProperties;
-import ui.UserAccountRegistrationForm;
+import ui.UserAccount;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -65,7 +65,7 @@ public class RegistrationTest {
         logger.info("Starting account registration with generated email");
         authenticationPage.startAccountAuth(email);
         logger.info("Account registration");
-        accountCreationPage.createAccount(new UserAccountRegistrationForm("Johnny", "Flynn",
+        accountCreationPage.createAccount(new UserAccount("Johnny", "Flynn",
                 password, email, "14", "3", "1983", "South Africa", "Johannesburg",
                 "10", postCode, mobilePhone, "Home"));
         logger.info("Account registration verification");

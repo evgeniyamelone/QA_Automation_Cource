@@ -1,20 +1,43 @@
 package ui;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
-@Setter
+import javax.annotation.Nullable;
+
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
-@JsonPropertyOrder({ "email", "password" })
+@NoArgsConstructor
 public class UserAccount {
+    @NonNull
+    private String firstName;
+    @NonNull
+    private String lastName;
+    @NonNull
+    private String password;
     @NonNull
     private String email;
     @NonNull
-    private String password;
+    private String day;
+    @NonNull
+    private String month;
+    @NonNull
+    private String year;
+    @Nullable
+    private String streetAddress;
+    @Nullable
+    private String city;
+    @Nullable
+    private String state;
+    @Nullable
+    private String postCode;
+    @Nullable
+    private String mobilePhone;
+    @Nullable
+    private String alias;
 }
+

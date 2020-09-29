@@ -11,6 +11,9 @@ public class AccountPage {
     @FindBy(xpath = "//*[contains(@title, 'Log me out')]")
     private WebElement signOutButton;
 
+    @FindBy(xpath = "//*[contains(@title, 'Information')]")
+    private WebElement myPersonalInformationButton;
+
     public AccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -18,5 +21,9 @@ public class AccountPage {
 
     public void signOut() {
         signOutButton.click();
+    }
+
+    public void openPersonalInfo() {
+        myPersonalInformationButton.click();
     }
 }
