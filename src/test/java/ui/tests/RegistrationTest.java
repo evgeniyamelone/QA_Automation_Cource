@@ -31,6 +31,7 @@ public class RegistrationTest {
     public static void setup() {
         logger.info("Setup process started");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getProperty("chromedriver"));
+        logger.info("ChromeDriver gets initiated");
         driver = new ChromeDriver();
     }
 
