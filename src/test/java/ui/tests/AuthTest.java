@@ -27,15 +27,14 @@ import java.util.logging.Logger;
 
 public class AuthTest {
     public static WebDriver driver;
-    public static MainPage mainPage;
-    public static AuthenticationPage authenticationPage;
-    public static AccountCreationPage accountCreationPage;
-    public static AccountPage accountPage;
-    public static PersonalInformationPage personalInformationPage;
+    public MainPage mainPage;
+    public AuthenticationPage authenticationPage;
+    public AccountCreationPage accountCreationPage;
+    public AccountPage accountPage;
+    public PersonalInformationPage personalInformationPage;
     private static final Logger logger = Logger.getLogger(RegistrationTest.class.getName());
-    Map<String, UserAccount> users = new HashMap<>();
-    UserAccountsPool userAccountsPool = new UserAccountsPool(users);
-    Map<String, UserAccountResult> usersUpdated = new HashMap<>();
+    public Map<String, UserAccount> users = new HashMap<>();
+    public UserAccountsPool userAccountsPool = new UserAccountsPool(users);
 
     @BeforeClass
     public static void setup() {
@@ -181,12 +180,12 @@ public class AuthTest {
                 user.getStreetAddress(), user.getCity(),
                 user.getState(), user.getPostCode(), user.getMobilePhone(), user.getAlias());
         userAccountsPool.serialize("src/test/resources/accountData.json", userPool);
+        logger.info("Signing out");
+        accountPage.signOut();
     }
 
     @AfterClass
     public static void tearDown() {
-        logger.info("Signing out");
-        accountPage.signOut();
         logger.info("Closing browser");
         driver.quit();
     }

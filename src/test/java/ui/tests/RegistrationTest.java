@@ -21,10 +21,10 @@ import java.util.logging.Logger;
 
 public class RegistrationTest {
     public static WebDriver driver;
-    public static MainPage mainPage;
-    public static AuthenticationPage authenticationPage;
-    public static AccountCreationPage accountCreationPage;
-    public static AccountPage accountPage;
+    public MainPage mainPage;
+    public AuthenticationPage authenticationPage;
+    public AccountCreationPage accountCreationPage;
+    public AccountPage accountPage;
     private static final Logger logger = Logger.getLogger(RegistrationTest.class.getName());
 
     @BeforeClass
@@ -71,12 +71,12 @@ public class RegistrationTest {
         logger.info("Account registration verification");
         Assert.assertEquals("Johnny Flynn",
                 driver.findElement(By.xpath("//*[contains(@title, 'View my customer account')]")).getText());
+        logger.info("Signing out");
+        accountPage.signOut();
     }
 
     @AfterClass
     public static void tearDown() {
-        logger.info("Signing out");
-        accountPage.signOut();
         logger.info("Closing browser");
         driver.quit();
     }
