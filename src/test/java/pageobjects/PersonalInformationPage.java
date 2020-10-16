@@ -8,11 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import ui.UserAccount;
 import ui.UserAccountResult;
 
-@Getter
-@Setter
 public class PersonalInformationPage {
     private WebDriver driver;
 
